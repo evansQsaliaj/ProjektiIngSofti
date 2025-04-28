@@ -5,7 +5,10 @@ export default function Navbar() {
   const { login, setLogin, navigation, isActive, setIsActive, deleteAccount } =
     useJobContext();
 
-  const links = [{ lable: "Home", path: "/" }];
+  const links = [
+    { lable: "Home", path: "/" },
+    { lable: "Job List", path: "/job-list" },
+  ];
 
   const rederedLinks = links.map((link) => {
     return (
@@ -106,7 +109,7 @@ export default function Navbar() {
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            {!login ? (
+            {login ? (
               <>
                 <a
                   href="#"

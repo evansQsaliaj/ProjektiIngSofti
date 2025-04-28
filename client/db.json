@@ -6,6 +6,27 @@
       "email": "dautialdo99@gmail.com",
       "password": "Aldo2004Aldo#",
       "title": "Programmer"
+    },
+    {
+      "id": "8ecd",
+      "name": "Blendri",
+      "email": "blendri@gmail.com",
+      "password": "Blendri1234",
+      "title": "Programmer"
+    }
+  ],
+  "lists": [
+    {
+      "id": "ebb0",
+      "title": "Backlog"
+    }
+  ],
+  "jobs": [
+    {
+      "id": "af0a",
+      "title": "New job in backlog",
+      "description": "Job description",
+      "listId": "ebb0"
     }
   ]
 }

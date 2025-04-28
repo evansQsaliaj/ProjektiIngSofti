@@ -5,10 +5,14 @@ import Navbar from "./navigation/NavBar";
 import useJobContext from "./hooks/use-job";
 import Route from "./navigation/Route";
 import HomePage from "./components/HomePage";
-import DeleteAccount from "./components/DeleteAccount";
+import ConfirmDelete from "./components/ConfirmDelete";
+import JobList from "./components/JobList";
+import AddList from "./components/AddList";
+import AddJob from "./components/AddJob";
 
-function App() {
+export default function App() {
   const { currentAccount, setCurrentAccount } = useJobContext();
+
   return (
     <div>
       <Navbar currentAccount={currentAccount} />
@@ -19,13 +23,17 @@ function App() {
         <Login setCurrentAccount={setCurrentAccount} />
       </Route>
       <Route path="/delete-account">
-        <DeleteAccount />
+        <ConfirmDelete />
       </Route>
       <Route path="/">
         <HomePage />
       </Route>
+      <Route path="/job-list">
+        <JobList />
+      </Route>
+      <Route path="/add-list">
+        <AddList />
+      </Route>
     </div>
   );
 }
-
-export default App;

@@ -1,9 +1,7 @@
 import { useState, useEffect } from "react";
 import useJobContext from "../hooks/use-job";
-import { useAuth0 } from "@auth0/auth0-react";
 
 export default function Login() {
-  const { loginWithRedirect } = useAuth0();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -15,7 +13,6 @@ export default function Login() {
     navigation,
     loginApp,
     setIsActive,
-    getAuthUser,
   } = useJobContext();
 
   const handleEmailChange = (event) => {
@@ -119,7 +116,7 @@ export default function Login() {
             <button
               type="submit"
               className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              onClick={() => loginWithRedirect()}
+              onClick={handleLogin}
             >
               Log in
             </button>

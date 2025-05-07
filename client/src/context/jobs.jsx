@@ -20,6 +20,7 @@ function Provider({ children }) {
   const [currentAccount, setCurrentAccount] = useState(getInitialAccount);
   const [isActive, setIsActive] = useState(false);
   const [accounts, setAccounts] = useState([]);
+  const [board, setBoard] = useState([]);
   const [lists, setLists] = useState([]);
   const [jobs, setJobs] = useState([]);
 
@@ -84,6 +85,13 @@ function Provider({ children }) {
 
     setAccounts(updateAccounts);
   };
+
+  /////BOARD FUNCTIONS/////
+
+  const fetchBoard = useCallback(async () => {
+    const response = await axios.get("http://localhost:3006/board");
+    setBoard(response.data);
+  }, []);
 
   /////LISTS FUNCTIONS/////
 
@@ -189,6 +197,11 @@ function Provider({ children }) {
     fetchAccounts,
     createAccounts,
     deleteAccount,
+
+    /////////////////
+    board,
+    setBoard,
+    fetchBoard,
 
     /////////////////
     lists,

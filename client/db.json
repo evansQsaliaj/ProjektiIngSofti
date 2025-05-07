@@ -15,18 +15,37 @@
       "title": "Programmer"
     }
   ],
+  "board": [
+    {
+      "id": "3pod",
+      "title": "Board 1"
+    }
+  ],
   "lists": [
     {
-      "id": "ebb0",
-      "title": "Backlog"
+      "title": "Backlog",
+      "id": "ebb0"
+    },
+    {
+      "id": "5160",
+      "title": "On progress"
+    },
+    {
+      "id": "bfc8",
+      "title": "Review"
+    },
+    {
+      "id": "e7ce",
+      "title": "Done"
     }
   ],
   "jobs": [
     {
-      "id": "af0a",
-      "title": "New job in backlog",
-      "description": "Job description",
-      "listId": "ebb0"
+      "id": "1fea",
+      "title": "New job",
+      "description": "New job description",
+      "listId": "ebb0",
+      "memberId": null
     }
   ]
 }

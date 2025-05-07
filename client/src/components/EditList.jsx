@@ -7,7 +7,7 @@ import {
 } from "@headlessui/react";
 import useJobContext from "../hooks/use-job";
 
-export default function EditList({ list }) {
+export default function EditList({ list, onEditDone }) {
   const { editList, navigation } = useJobContext();
 
   const [open, setOpen] = useState(true);
@@ -17,11 +17,18 @@ export default function EditList({ list }) {
     e.preventDefault();
     editList(list.id, title);
     setOpen(false);
-    navigation("/job-list");
+    onEditDone();
+    navigation("/board");
   };
 
   const handleTitle = (event) => {
     setTitle(event.target.value);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+    onEditDone();
+    navigation("/board");
   };
 
   return (
@@ -69,10 +76,7 @@ export default function EditList({ list }) {
               </button>
               <button
                 type="button"
-                onClick={() => {
-                  setOpen(false);
-                  navigation("/job-list");
-                }}
+                onClick={handleClose}
                 className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto cursor-pointer"
               >
                 Cancel

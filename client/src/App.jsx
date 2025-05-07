@@ -1,20 +1,34 @@
-import "./App.css";
+import { useEffect } from "react";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Navbar from "./navigation/NavBar";
 import useJobContext from "./hooks/use-job";
 import Route from "./navigation/Route";
-import HomePage from "./components/HomePage";
 import ConfirmDelete from "./components/ConfirmDelete";
-import JobList from "./components/JobList";
-import AddList from "./components/AddList";
-import AddJob from "./components/AddJob";
+import Board from "./components/Board";
+
+import "./App.css";
 
 export default function App() {
-  const { currentAccount, setCurrentAccount } = useJobContext();
+  const {
+    accounts,
+    fetchAccounts,
+    fetchBoard,
+    fetchLists,
+    fetchJobs,
+    currentAccount,
+    setCurrentAccount,
+  } = useJobContext();
+
+  useEffect(() => {
+    fetchAccounts();
+    fetchBoard();
+    fetchLists();
+    fetchJobs();
+  }, []);
 
   return (
-    <div>
+    <>
       <Navbar currentAccount={currentAccount} />
       <Route path="/register">
         <Register />
@@ -25,15 +39,9 @@ export default function App() {
       <Route path="/delete-account">
         <ConfirmDelete />
       </Route>
-      <Route path="/">
-        <HomePage />
+      <Route path="/board">
+        <Board accounts={accounts} />
       </Route>
-      <Route path="/job-list">
-        <JobList />
-      </Route>
-      <Route path="/add-list">
-        <AddList />
-      </Route>
-    </div>
+    </>
   );
 }

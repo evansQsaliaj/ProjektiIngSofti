@@ -8,22 +8,21 @@ import {
 
 import useJobContext from "../hooks/use-job";
 
-export default function AddJob({ listId }) {
+export default function AddJob({ listId, listModal, setListModal }) {
   const { createJob, navigation } = useJobContext();
 
-  const [open, setOpen] = useState(true);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
   const handleJobCreate = (e) => {
     e.preventDefault();
     createJob(title, description, listId);
-    setOpen(false);
-    navigation("/job-list");
+    setListModal(false);
+    navigation("/board");
   };
 
   return (
-    <Dialog open={open} onClose={setOpen} className="relative z-10">
+    <Dialog open={listModal} onClose={setListModal} className="relative z-10">
       <DialogBackdrop
         transition
         className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
@@ -83,8 +82,8 @@ export default function AddJob({ listId }) {
               <button
                 type="button"
                 onClick={() => {
-                  setOpen(false);
-                  navigation("/job-list");
+                  setListModal(false);
+                  navigation("/board");
                 }}
                 className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto cursor-pointer"
               >

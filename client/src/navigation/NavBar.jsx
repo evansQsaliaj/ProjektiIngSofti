@@ -7,7 +7,7 @@ export default function Navbar() {
 
   const links = [
     { lable: "Home", path: "/" },
-    { lable: "Job List", path: "/job-list" },
+    { lable: "Board", path: "/board" },
   ];
 
   const rederedLinks = links.map((link) => {

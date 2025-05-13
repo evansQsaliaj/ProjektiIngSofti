@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import useJobContext from "../hooks/use-job";
 import List from "./List";
 import AddList from "./AddList";
+import { DndContext } from "@dnd-kit/core";
 
 export default function Board({ accounts }) {
-  const { lists } = useJobContext();
+  const { lists, handleDragEnd } = useJobContext();
   const [showAddList, setShowAddList] = useState(false);
   const [activeUser, setActiveUser] = useState(null);
   const [userColors, setUserColors] = useState({});
@@ -29,7 +30,7 @@ export default function Board({ accounts }) {
     setShowAddList((prevState) => !prevState);
   };
 
-  const handleUserClick = (userId) => {
+  const handleUserName = (userId) => {
     setActiveUser(userId === activeUser ? null : userId);
   };
 
@@ -42,7 +43,7 @@ export default function Board({ accounts }) {
               key={acc.id}
               className="w-10 h-10 rounded-full flex items-center justify-center text-white font-medium cursor-pointer relative"
               style={{ backgroundColor: userColors[acc.id] }}
-              onClick={() => handleUserClick(acc.id)}
+              onClick={() => handleUserName(acc.id)}
             >
               {acc.name[0]}
               {activeUser === acc.id && (
@@ -71,12 +72,14 @@ export default function Board({ accounts }) {
           </div>
         )}
 
-        <div className="flex">
-          {lists.map((list) => (
-            <div key={list.id}>
-              <List list={list} accounts={accounts} />
-            </div>
-          ))}
+        <div className="grid grid-cols-4 gap-y-20 ">
+          <DndContext onDragEnd={handleDragEnd}>
+            {lists.map((list) => (
+              <div key={list.id}>
+                <List list={list} accounts={accounts} />
+              </div>
+            ))}
+          </DndContext>
         </div>
       </div>
     </div>

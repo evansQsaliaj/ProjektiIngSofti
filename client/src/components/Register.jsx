@@ -37,7 +37,7 @@ export default function Register() {
     if (password.length >= 6) {
       createAccounts(name, email, password, title);
       setLogin(true);
-      navigation("/");
+      navigation("/board");
 
       setIsActive(true);
     } else {
@@ -148,7 +148,9 @@ export default function Register() {
             >
               Register
             </button>
-            {errorMessage && <p className="has-text-danger">{errorMessage}</p>}
+            {errorMessage && (
+              <p className="text-sm text-red-600">{errorMessage}</p>
+            )}
           </div>
         </form>
 

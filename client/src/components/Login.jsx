@@ -37,7 +37,7 @@ export default function Login() {
     if (foundAccount) {
       loginApp();
       setCurrentAccount(foundAccount);
-      navigation("/");
+      navigation("/board");
       setErrorMessage("");
       setIsActive(true);
     } else {
@@ -120,7 +120,9 @@ export default function Login() {
             >
               Log in
             </button>
-            {errorMessage && <p className="has-text-danger">{errorMessage}</p>}
+            {errorMessage && (
+              <p className="text-sm text-red-600">{errorMessage}</p>
+            )}
           </div>
         </form>
 

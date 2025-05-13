@@ -2,17 +2,27 @@
   "accounts": [
     {
       "id": "4839",
-      "name": "Aldo Dauti",
+      "name": "Aldo",
       "email": "dautialdo99@gmail.com",
       "password": "Aldo2004Aldo#",
-      "title": "Programmer"
+      "title": "Programmer",
+      "jobId": null
     },
     {
       "id": "8ecd",
       "name": "Blendri",
       "email": "blendri@gmail.com",
       "password": "Blendri1234",
-      "title": "Programmer"
+      "title": "Programmer",
+      "jobId": null
+    },
+    {
+      "id": "1def",
+      "name": "Evans ",
+      "email": "evans@test.com",
+      "password": "Evans1234",
+      "title": "Programmer",
+      "jobId": null
     }
   ],
   "board": [
@@ -41,11 +51,10 @@
   ],
   "jobs": [
     {
-      "id": "1fea",
+      "id": "1ee3",
       "title": "New job",
       "description": "New job description",
-      "listId": "ebb0",
-      "memberId": null
+      "listId": "ebb0"
     }
   ]
 }

@@ -5,6 +5,7 @@ import useJobContext from "../hooks/use-job";
 import Job from "./Job";
 import EditList from "./EditList";
 import AddJob from "./AddJob";
+import { useDroppable } from "@dnd-kit/core";
 
 export default function List({ list, accounts }) {
   const { deleteList, jobs } = useJobContext();
@@ -12,6 +13,10 @@ export default function List({ list, accounts }) {
   const [editId, setEditId] = useState(-1);
   const [addJobListId, setAddJobListId] = useState(null);
   const [listModal, setListModal] = useState(false);
+
+  const { setNodeRef } = useDroppable({
+    id: list.id,
+  });
 
   const handleDeleteList = (id) => {
     deleteList(id);
@@ -42,7 +47,10 @@ export default function List({ list, accounts }) {
     return (
       <div>
         <div className="bg-white text-black p-4 rounded-lg w-64 border border-gray-300 shadow-sm mx-5">
-          <div className="flex justify-between items-center mb-4">
+          <div
+            ref={setNodeRef}
+            className="flex justify-between items-center mb-4"
+          >
             <h2 className="font-medium">{list.title}</h2>
             <div className="flex gap-2">
               <button

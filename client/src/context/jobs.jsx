@@ -23,6 +23,7 @@ function Provider({ children }) {
   const [board, setBoard] = useState([]);
   const [lists, setLists] = useState([]);
   const [jobs, setJobs] = useState([]);
+  const [selectedMember, setSelectedMember] = useState(null);
 
   /////NAVIGATION/////
   useEffect(() => {
@@ -187,6 +188,29 @@ function Provider({ children }) {
     setJobs(updateJobs);
   };
 
+  /////DRAG AND DROP EVENT/////
+
+  const handleDragEnd = async (event) => {
+    const { active, over } = event;
+
+    if (!over) {
+      return;
+    }
+
+    const jobId = active.id;
+    const newListId = over.id;
+
+    await axios.patch(`http://localhost:3006/jobs/${jobId}`, {
+      listId: newListId,
+    });
+
+    setJobs((prevJobs) =>
+      prevJobs.map((job) =>
+        job.id === jobId ? { ...job, listId: newListId } : job
+      )
+    );
+  };
+
   const valueToShare = {
     navigation,
     currentPath,
@@ -218,6 +242,8 @@ function Provider({ children }) {
     createJob,
     editJob,
     deleteJob,
+    selectedMember,
+    setSelectedMember,
 
     /////////////////
     login,
@@ -228,6 +254,9 @@ function Provider({ children }) {
     removeDataFromStorage,
     isActive,
     setIsActive,
+
+    /////////////////
+    handleDragEnd,
   };
 
   return (

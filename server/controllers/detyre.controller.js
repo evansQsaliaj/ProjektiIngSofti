@@ -1,4 +1,4 @@
-import detyreModel from '../models/detyre.model'
+import detyreModel from '../models/detyre.model.js'
 
 const detyreController ={}
 

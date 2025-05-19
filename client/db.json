@@ -54,6 +54,12 @@
       "id": "1ee3",
       "title": "New job",
       "description": "New job description",
+      "listId": "bfc8"
+    },
+    {
+      "id": "5883",
+      "title": "New Job",
+      "description": "Description for new job",
       "listId": "ebb0"
     }
   ]

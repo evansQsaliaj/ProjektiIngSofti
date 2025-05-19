@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import useJobContext from "../hooks/use-job";
 import { MdDeleteOutline } from "react-icons/md";
 import { CiCircleInfo } from "react-icons/ci";

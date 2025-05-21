@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import useJobContext from "../hooks/use-job";
 
-export default function Login() {
+export default function Login({ setAuthAcc }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
@@ -9,10 +9,10 @@ export default function Login() {
   const {
     accounts,
     fetchAccounts,
-    setCurrentAccount,
     navigation,
     loginApp,
     setIsActive,
+    setLogin,
   } = useJobContext();
 
   const handleEmailChange = (event) => {
@@ -30,15 +30,14 @@ export default function Login() {
   const handleLogin = (event) => {
     event.preventDefault();
 
-    const foundAccount = accounts.find(
-      (account) => account.password === password
-    );
+    const foundAccount = accounts.find((account) => account.email === email);
 
     if (foundAccount) {
       loginApp();
-      setCurrentAccount(foundAccount);
+      setAuthAcc(foundAccount);
       navigation("/board");
       setErrorMessage("");
+      setLogin(true);
       setIsActive(true);
     } else {
       setErrorMessage("Invalid email or password");

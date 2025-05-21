@@ -4,7 +4,7 @@ import Link from "./Link";
 import ConfirmDelete from "../components/ConfirmDelete";
 import { CiAlignTop } from "react-icons/ci";
 
-export default function Navbar() {
+export default function Navbar({ authAcc }) {
   const { login, setLogin, navigation, setIsActive } = useJobContext();
 
   const [deleteAccountModal, setDeleteAccountModal] = useState(false);
@@ -80,12 +80,10 @@ export default function Navbar() {
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex shrink-0 items-center">
-              <CiAlignTop size={35} color={"white"} stroke-width={1} />
+              <CiAlignTop size={35} color={"white"} strokeWidth={1} />
             </div>
             <div className="hidden sm:ml-6 sm:block">
-              {!login ? (
-                <div className="flex space-x-4"></div>
-              ) : (
+              {login && (
                 <div className="flex space-x-4">
                   <Link
                     key={"Board"}
@@ -100,24 +98,7 @@ export default function Navbar() {
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            {!login ? (
-              <>
-                <a
-                  href="#"
-                  className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                  onClick={handleOpenLogin}
-                >
-                  Log In
-                </a>
-                <a
-                  href="#"
-                  className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                  onClick={handleOpenRegister}
-                >
-                  Register
-                </a>
-              </>
-            ) : (
+            {login ? (
               <>
                 <a
                   href="#"
@@ -135,6 +116,23 @@ export default function Navbar() {
                   Delete Account
                 </a>
               </>
+            ) : (
+              <>
+                <a
+                  href="#"
+                  className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  onClick={handleOpenLogin}
+                >
+                  Log In
+                </a>
+                <a
+                  href="#"
+                  className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  onClick={handleOpenRegister}
+                >
+                  Register
+                </a>
+              </>
             )}
           </div>
         </div>
@@ -142,7 +140,7 @@ export default function Navbar() {
 
       {deleteAccountModal && (
         <ConfirmDelete
-          // account={account}
+          authAcc={authAcc}
           deleteAccountModal={deleteAccountModal}
           setDeleteAccountModal={setDeleteAccountModal}
         />

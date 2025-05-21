@@ -8,16 +8,10 @@ const getInitialData = () => {
   return login ? JSON.parse(login) : false;
 };
 
-const getInitialAccount = () => {
-  const user = localStorage.getItem("login");
-  return user ? JSON.parse(user) : [];
-};
-
 function Provider({ children }) {
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
   const [login, setLogin] = useState(getInitialData);
-  const [currentAccount, setCurrentAccount] = useState(getInitialAccount);
   const [isActive, setIsActive] = useState(false);
   const [accounts, setAccounts] = useState([]);
   const [board, setBoard] = useState([]);
@@ -46,19 +40,15 @@ function Provider({ children }) {
 
   useEffect(() => {
     localStorage.setItem("login", JSON.stringify(login));
-    localStorage.setItem("currentAccount", JSON.stringify(currentAccount));
   });
 
   const loginApp = () => {
     setLogin(true);
-    setCurrentAccount(getInitialAccount);
   };
 
   const removeDataFromStorage = () => {
     localStorage.removeItem("login");
-    localStorage.removeItem("currentAccount");
     setLogin(false);
-    setCurrentAccount([]);
   };
 
   const fetchAccounts = useCallback(async () => {
@@ -250,8 +240,6 @@ function Provider({ children }) {
     login,
     setLogin,
     loginApp,
-    currentAccount,
-    setCurrentAccount,
     removeDataFromStorage,
     isActive,
     setIsActive,

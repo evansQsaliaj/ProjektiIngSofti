@@ -8,17 +8,20 @@ import {
 import useJobContext from "../hooks/use-job";
 
 export default function ConfirmDelete({
-  account,
+  authAcc,
   deleteAccountModal,
   setDeleteAccountModal,
 }) {
-  const { deleteAccounts, navigation } = useJobContext();
+  const { deleteAccount, navigation, setLogin } = useJobContext();
+
+  console.log(authAcc);
 
   const confirmDelete = (e) => {
     e.preventDefault();
-    deleteAccounts(account.id);
+    deleteAccount(authAcc.id);
     setDeleteAccountModal(false);
-    navigation("/");
+    setLogin(false);
+    navigation("/login");
   };
 
   const handleClose = (e) => {

@@ -7,22 +7,6 @@
       "password": "Aldo2004Aldo#",
       "title": "Programmer",
       "jobId": null
-    },
-    {
-      "id": "8ecd",
-      "name": "Blendri",
-      "email": "blendri@gmail.com",
-      "password": "Blendri1234",
-      "title": "Programmer",
-      "jobId": "f099"
-    },
-    {
-      "id": "1def",
-      "name": "Evans ",
-      "email": "evans@test.com",
-      "password": "Evans1234",
-      "title": "Programmer",
-      "jobId": null
     }
   ],
   "board": [

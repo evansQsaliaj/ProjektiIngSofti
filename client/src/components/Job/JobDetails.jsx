@@ -1,11 +1,11 @@
-import Dropdown from "./Dropdown";
+import Dropdown from "../Dropdown";
 import { IoMdClose } from "react-icons/io";
 import { MdDeleteOutline } from "react-icons/md";
 import axios from "axios";
-import useJobContext from "../hooks/use-job";
 
 export default function JobDetails({ job, setJobDetails, accounts }) {
-  const handleCloseModal = () => {
+  const handleCloseModal = (e) => {
+    e.preventDefault();
     setJobDetails(false);
   };
 

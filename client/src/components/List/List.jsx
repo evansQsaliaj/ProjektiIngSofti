@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { MdOutlineEdit, MdDeleteOutline } from "react-icons/md";
 import { IoMdAdd } from "react-icons/io";
-import useJobContext from "../hooks/use-job";
-import Job from "./Job";
+import useJobContext from "../../hooks/use-job";
 import EditList from "./EditList";
-import AddJob from "./AddJob";
+import AddJob from "../Job/AddJob";
 import { useDroppable } from "@dnd-kit/core";
+import Job from "../Job/Job";
 
 export default function List({ list, accounts }) {
   const { deleteList, jobs } = useJobContext();

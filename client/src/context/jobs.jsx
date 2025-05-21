@@ -161,10 +161,11 @@ function Provider({ children }) {
     setJobs(updateJobs);
   };
 
-  const editJob = async (id, newTitle, newDescription) => {
+  const editJob = async (id, newTitle, newDescription, listId) => {
     const response = await axios.put(`http://localhost:3006/jobs/${id}`, {
       title: newTitle,
       description: newDescription,
+      listId: listId,
     });
 
     const updateJobs = jobs.map((job) => {

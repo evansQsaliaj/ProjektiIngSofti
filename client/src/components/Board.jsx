@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useJobContext from "../hooks/use-job";
-import List from "./List";
-import AddList from "./AddList";
+import List from "./List/List";
+import AddList from "./List/AddList";
 import { DndContext } from "@dnd-kit/core";
 
 export default function Board({ accounts }) {

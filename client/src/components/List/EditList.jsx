@@ -5,24 +5,35 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
+import useJobContext from "../../hooks/use-job";
 
-import useJobContext from "../hooks/use-job";
+export default function EditList({ list, onEditDone }) {
+  const { editList, navigation } = useJobContext();
 
-export default function AddJob({ listId, listModal, setListModal }) {
-  const { createJob, navigation } = useJobContext();
+  const [open, setOpen] = useState(true);
+  const [title, setTitle] = useState(list.title);
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-
-  const handleJobCreate = (e) => {
+  const handleEditList = (e) => {
     e.preventDefault();
-    createJob(title, description, listId);
-    setListModal(false);
+    editList(list.id, title);
+    setOpen(false);
+    onEditDone();
+    navigation("/board");
+  };
+
+  const handleTitle = (e) => {
+    setTitle(e.target.value);
+  };
+
+  const handleClose = (e) => {
+    e.preventDefault();
+    setOpen(false);
+    onEditDone();
     navigation("/board");
   };
 
   return (
-    <Dialog open={listModal} onClose={setListModal} className="relative z-10">
+    <Dialog open={open} onClose={setOpen} className="relative z-10">
       <DialogBackdrop
         transition
         className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
@@ -38,35 +49,21 @@ export default function AddJob({ listId, listModal, setListModal }) {
               <div className="sm:flex sm:items-start">
                 <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                   <DialogTitle className="font-semibold text-gray-900 text-lg">
-                    Create new job
+                    Edit list
                   </DialogTitle>
 
-                  <div className="mt-10">
-                    <input
-                      id="title"
-                      name="title"
-                      type="text"
-                      placeholder="Job title"
-                      value={title}
-                      onChange={(e) => {
-                        setTitle(e.target.value);
-                      }}
-                      className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                    />
-                  </div>
-
-                  <div className="mt-10">
-                    <input
-                      id="description"
-                      name="description"
-                      type="text"
-                      placeholder="Job description"
-                      value={description}
-                      onChange={(e) => {
-                        setDescription(e.target.value);
-                      }}
-                      className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                    />
+                  <div className="mt-5">
+                    <div className="mt-2">
+                      <label htmlFor="title">Title</label>
+                      <input
+                        id="title"
+                        name="title"
+                        type="text"
+                        value={title}
+                        onChange={handleTitle}
+                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 mt-2"
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -74,17 +71,14 @@ export default function AddJob({ listId, listModal, setListModal }) {
             <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
               <button
                 type="button"
-                onClick={handleJobCreate}
+                onClick={handleEditList}
                 className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs sm:ml-3 sm:w-auto cursor-pointer"
               >
-                Add Job
+                Edit List
               </button>
               <button
                 type="button"
-                onClick={() => {
-                  setListModal(false);
-                  navigation("/board");
-                }}
+                onClick={handleClose}
                 className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto cursor-pointer"
               >
                 Cancel

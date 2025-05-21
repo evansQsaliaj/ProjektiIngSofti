@@ -6,26 +6,23 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 
-import useJobContext from "../hooks/use-job";
+import useJobContext from "../../hooks/use-job";
 
-export default function AddList({ showAddList, setShowAddList }) {
-  const { createLists, navigation } = useJobContext();
+export default function AddJob({ listId, listModal, setListModal }) {
+  const { createJob, navigation } = useJobContext();
 
   const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
-  const handleListCreate = (e) => {
+  const handleJobCreate = (e) => {
     e.preventDefault();
-    createLists(title);
-    setShowAddList(false);
+    createJob(title, description, listId);
+    setListModal(false);
     navigation("/board");
   };
 
   return (
-    <Dialog
-      open={showAddList}
-      onClose={setShowAddList}
-      className="relative z-10"
-    >
+    <Dialog open={listModal} onClose={setListModal} className="relative z-10">
       <DialogBackdrop
         transition
         className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
@@ -41,20 +38,36 @@ export default function AddList({ showAddList, setShowAddList }) {
               <div className="sm:flex sm:items-start">
                 <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                   <DialogTitle className="font-semibold text-gray-900 text-lg">
-                    Create new list
+                    Create new job
                   </DialogTitle>
 
                   <div className="mt-10">
+                    <label htmlFor="title">Title</label>
                     <input
                       id="title"
                       name="title"
                       type="text"
-                      placeholder="List title"
+                      placeholder="Job title"
                       value={title}
                       onChange={(e) => {
                         setTitle(e.target.value);
                       }}
-                      className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                      className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 mt-2"
+                    />
+                  </div>
+
+                  <div className="mt-10">
+                    <label htmlFor="description">Description</label>
+                    <input
+                      id="description"
+                      name="description"
+                      type="text"
+                      placeholder="Job description"
+                      value={description}
+                      onChange={(e) => {
+                        setDescription(e.target.value);
+                      }}
+                      className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 mt-2"
                     />
                   </div>
                 </div>
@@ -63,15 +76,15 @@ export default function AddList({ showAddList, setShowAddList }) {
             <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
               <button
                 type="button"
-                onClick={handleListCreate}
+                onClick={handleJobCreate}
                 className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs sm:ml-3 sm:w-auto cursor-pointer"
               >
-                Add List
+                Add Job
               </button>
               <button
                 type="button"
                 onClick={() => {
-                  setShowAddList(false);
+                  setListModal(false);
                   navigation("/board");
                 }}
                 className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto cursor-pointer"

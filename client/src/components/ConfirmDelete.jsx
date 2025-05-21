@@ -8,7 +8,7 @@ import {
 import useJobContext from "../hooks/use-job";
 
 export default function ConfirmDelete({ account }) {
-  const { deleteAccounts } = useJobContext();
+  const { deleteAccounts, navigation } = useJobContext();
   const [open, setOpen] = useState(true);
 
   const confirmDelete = (e) => {
@@ -16,6 +16,12 @@ export default function ConfirmDelete({ account }) {
     deleteAccounts(account.id);
     setOpen(false);
     navigation("/");
+  };
+
+  const handleClose = (e) => {
+    e.preventDefault();
+    setOpen(false);
+    navigation("/board");
   };
 
   return (
@@ -61,7 +67,7 @@ export default function ConfirmDelete({ account }) {
               <button
                 type="button"
                 data-autofocus
-                onClick={() => setOpen(false)}
+                onClick={handleClose}
                 className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto"
               >
                 Cancel

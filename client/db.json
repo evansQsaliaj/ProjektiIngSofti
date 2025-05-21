@@ -14,7 +14,7 @@
       "email": "blendri@gmail.com",
       "password": "Blendri1234",
       "title": "Programmer",
-      "jobId": null
+      "jobId": "f099"
     },
     {
       "id": "1def",
@@ -37,8 +37,8 @@
       "id": "ebb0"
     },
     {
-      "id": "5160",
-      "title": "On progress"
+      "title": "In progress",
+      "id": "5160"
     },
     {
       "id": "bfc8",
@@ -51,16 +51,46 @@
   ],
   "jobs": [
     {
-      "id": "1ee3",
-      "title": "New job",
-      "description": "New job description",
+      "id": "67a0",
+      "title": "Design",
+      "description": "Creating the design for the webiste",
+      "listId": "e7ce"
+    },
+    {
+      "title": "Database",
+      "description": "Description for database",
+      "listId": "ebb0",
+      "id": "6cf1"
+    },
+    {
+      "id": "e4bd",
+      "title": "Creating Models",
+      "description": "",
+      "listId": "5160"
+    },
+    {
+      "title": "Making user authentication",
+      "description": "Using OAuth library to mkae user authentication",
+      "listId": "bfc8",
+      "id": "f099"
+    },
+    {
+      "id": "7ca2",
+      "title": "Sending notification with email",
+      "description": "",
+      "listId": "5160"
+    },
+    {
+      "id": "9f9e",
+      "title": "Creating views for crud",
+      "description": "",
       "listId": "bfc8"
     },
     {
-      "id": "5883",
-      "title": "New Job",
-      "description": "Description for new job",
-      "listId": "ebb0"
+      "id": "7f22",
+      "title": "Creating views for login and signup",
+      "description": "",
+      "listId": "bfc8"
     }
   ]
 }

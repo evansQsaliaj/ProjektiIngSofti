@@ -7,25 +7,32 @@ import {
 } from "@headlessui/react";
 import useJobContext from "../hooks/use-job";
 
-export default function ConfirmDelete({ account }) {
+export default function ConfirmDelete({
+  account,
+  deleteAccountModal,
+  setDeleteAccountModal,
+}) {
   const { deleteAccounts, navigation } = useJobContext();
-  const [open, setOpen] = useState(true);
 
   const confirmDelete = (e) => {
     e.preventDefault();
     deleteAccounts(account.id);
-    setOpen(false);
+    setDeleteAccountModal(false);
     navigation("/");
   };
 
   const handleClose = (e) => {
     e.preventDefault();
-    setOpen(false);
+    setDeleteAccountModal(false);
     navigation("/board");
   };
 
   return (
-    <Dialog open={open} onClose={setOpen} className="relative z-10">
+    <Dialog
+      open={deleteAccountModal}
+      onClose={setDeleteAccountModal}
+      className="relative z-10"
+    >
       <DialogBackdrop
         transition
         className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"

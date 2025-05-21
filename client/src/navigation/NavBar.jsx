@@ -1,20 +1,24 @@
+import { useState } from "react";
 import useJobContext from "../hooks/use-job";
 import Link from "./Link";
+import ConfirmDelete from "../components/ConfirmDelete";
+import { CiAlignTop } from "react-icons/ci";
 
 export default function Navbar() {
-  const { login, setLogin, navigation, isActive, setIsActive, deleteAccount } =
-    useJobContext();
+  const { login, setLogin, navigation, setIsActive } = useJobContext();
+
+  const [deleteAccountModal, setDeleteAccountModal] = useState(false);
 
   const handleLogOut = (event) => {
     event.preventDefault();
     setLogin(false);
-    navigation("/");
+    navigation("/login");
     setIsActive(false);
   };
 
   const handleDelete = (event) => {
     event.preventDefault();
-    navigation("/delete-account");
+    setDeleteAccountModal(true);
   };
 
   const handleOpenLogin = (event) => {
@@ -76,11 +80,7 @@ export default function Navbar() {
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex shrink-0 items-center">
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                alt="Your Company"
-              />
+              <CiAlignTop size={35} color={"white"} stroke-width={1} />
             </div>
             <div className="hidden sm:ml-6 sm:block">
               {!login ? (
@@ -139,6 +139,14 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+
+      {deleteAccountModal && (
+        <ConfirmDelete
+          // account={account}
+          deleteAccountModal={deleteAccountModal}
+          setDeleteAccountModal={setDeleteAccountModal}
+        />
+      )}
     </nav>
   );
 }

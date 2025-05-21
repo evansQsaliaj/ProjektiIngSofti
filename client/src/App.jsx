@@ -36,9 +36,6 @@ export default function App() {
       <Route path="/login">
         <Login setCurrentAccount={setCurrentAccount} />
       </Route>
-      <Route path="/delete-account">
-        <ConfirmDelete />
-      </Route>
       <Route path="/board">
         <Board accounts={accounts} />
       </Route>

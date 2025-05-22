@@ -6,14 +6,11 @@ import 'dotenv/config'
 
 const app = express()
 
-mongoose.connect("mongodb://localhost:27017/mydb", {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+mongoose.connect(process.env.DATABAZA)
 
   app.use(express.json())
-  app.use('/detyrat',detyraRoute)
-  app.use('/userat',userRoute)
+  app.use('/api/v1.1/detyrat',detyraRoute)
+  app.use('/api/v1.1/userat',userRoute)
 
 app.listen(process.env.PORTA, () => {
     console.log(`Serveri po degjon ne http://localhost:${process.env.PORTA}`)

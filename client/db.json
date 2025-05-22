@@ -14,7 +14,7 @@
       "email": "blendri@gmail.com",
       "password": "Blendri1234",
       "title": "Programmer",
-      "jobId": null
+      "jobId": "5883"
     },
     {
       "id": "1def",
@@ -23,6 +23,14 @@
       "password": "Evans1234",
       "title": "Programmer",
       "jobId": null
+    },
+    {
+      "id": "7fc0",
+      "name": "evans1",
+      "email": "evans.saliaj@fshnstudent.info",
+      "password": "?9E%a^:s2k=dX3h",
+      "title": "dev",
+      "jobId": "5883"
     }
   ],
   "board": [
@@ -54,12 +62,18 @@
       "id": "1ee3",
       "title": "New job",
       "description": "New job description",
-      "listId": "bfc8"
+      "listId": "5160"
     },
     {
       "id": "5883",
       "title": "New Job",
       "description": "Description for new job",
+      "listId": "ebb0"
+    },
+    {
+      "id": "c56e",
+      "title": "front",
+      "description": "dev",
       "listId": "ebb0"
     }
   ]

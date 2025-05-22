@@ -14,7 +14,7 @@ userController.krijoUser = async (req,res)=>{
 userController.ktheGjithUserat = async (req,res)=>{
     try {
         const userat = await userModel.find()
-        res.status(200).json(detyrat)        
+        res.status(200).json(userat)        
     } catch (error) {
         res.status(500).json({error:error.message})
     }

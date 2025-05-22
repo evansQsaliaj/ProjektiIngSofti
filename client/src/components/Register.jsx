@@ -36,10 +36,7 @@ export default function Register() {
 
     if (password.length >= 6) {
       createAccounts(name, email, password, title);
-      setLogin(true);
-      navigation("/board");
-
-      setIsActive(true);
+      navigation("/login");
     } else {
       setErrorMessage("Password needs to be at least 6 characters");
     }

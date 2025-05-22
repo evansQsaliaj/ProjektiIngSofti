@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import Navbar from "./navigation/NavBar";
@@ -10,15 +10,10 @@ import Board from "./components/Board";
 import "./App.css";
 
 export default function App() {
-  const {
-    accounts,
-    fetchAccounts,
-    fetchBoard,
-    fetchLists,
-    fetchJobs,
-    currentAccount,
-    setCurrentAccount,
-  } = useJobContext();
+  const { accounts, fetchAccounts, fetchBoard, fetchLists, fetchJobs } =
+    useJobContext();
+
+  const [authAcc, setAuthAcc] = useState([]);
 
   useEffect(() => {
     fetchAccounts();
@@ -29,15 +24,12 @@ export default function App() {
 
   return (
     <>
-      <Navbar currentAccount={currentAccount} />
+      <Navbar authAcc={authAcc} />
       <Route path="/register">
         <Register />
       </Route>
       <Route path="/login">
-        <Login setCurrentAccount={setCurrentAccount} />
-      </Route>
-      <Route path="/delete-account">
-        <ConfirmDelete />
+        <Login setAuthAcc={setAuthAcc} />
       </Route>
       <Route path="/board">
         <Board accounts={accounts} />

@@ -1,20 +1,24 @@
+import { useState } from "react";
 import useJobContext from "../hooks/use-job";
 import Link from "./Link";
+import ConfirmDelete from "../components/ConfirmDelete";
+import { CiAlignTop } from "react-icons/ci";
 
-export default function Navbar() {
-  const { login, setLogin, navigation, isActive, setIsActive, deleteAccount } =
-    useJobContext();
+export default function Navbar({ authAcc }) {
+  const { login, setLogin, navigation, setIsActive } = useJobContext();
+
+  const [deleteAccountModal, setDeleteAccountModal] = useState(false);
 
   const handleLogOut = (event) => {
     event.preventDefault();
     setLogin(false);
-    navigation("/");
+    navigation("/login");
     setIsActive(false);
   };
 
   const handleDelete = (event) => {
     event.preventDefault();
-    navigation("/delete-account");
+    setDeleteAccountModal(true);
   };
 
   const handleOpenLogin = (event) => {
@@ -76,16 +80,10 @@ export default function Navbar() {
           </div>
           <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
             <div className="flex shrink-0 items-center">
-              <img
-                className="h-8 w-auto"
-                src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=500"
-                alt="Your Company"
-              />
+              <CiAlignTop size={35} color={"white"} strokeWidth={1} />
             </div>
             <div className="hidden sm:ml-6 sm:block">
-              {!login ? (
-                <div className="flex space-x-4"></div>
-              ) : (
+              {login && (
                 <div className="flex space-x-4">
                   <Link
                     key={"Board"}
@@ -100,24 +98,7 @@ export default function Navbar() {
             </div>
           </div>
           <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-            {!login ? (
-              <>
-                <a
-                  href="#"
-                  className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                  onClick={handleOpenLogin}
-                >
-                  Log In
-                </a>
-                <a
-                  href="#"
-                  className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
-                  onClick={handleOpenRegister}
-                >
-                  Register
-                </a>
-              </>
-            ) : (
+            {login ? (
               <>
                 <a
                   href="#"
@@ -135,10 +116,35 @@ export default function Navbar() {
                   Delete Account
                 </a>
               </>
+            ) : (
+              <>
+                <a
+                  href="#"
+                  className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  onClick={handleOpenLogin}
+                >
+                  Log In
+                </a>
+                <a
+                  href="#"
+                  className="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white"
+                  onClick={handleOpenRegister}
+                >
+                  Register
+                </a>
+              </>
             )}
           </div>
         </div>
       </div>
+
+      {deleteAccountModal && (
+        <ConfirmDelete
+          authAcc={authAcc}
+          deleteAccountModal={deleteAccountModal}
+          setDeleteAccountModal={setDeleteAccountModal}
+        />
+      )}
     </nav>
   );
 }

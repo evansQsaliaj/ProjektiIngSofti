@@ -7,19 +7,35 @@ import {
 } from "@headlessui/react";
 import useJobContext from "../hooks/use-job";
 
-export default function ConfirmDelete({ account }) {
-  const { deleteAccounts } = useJobContext();
-  const [open, setOpen] = useState(true);
+export default function ConfirmDelete({
+  authAcc,
+  deleteAccountModal,
+  setDeleteAccountModal,
+}) {
+  const { deleteAccount, navigation, setLogin } = useJobContext();
+
+  console.log(authAcc);
 
   const confirmDelete = (e) => {
     e.preventDefault();
-    deleteAccounts(account.id);
-    setOpen(false);
-    navigation("/");
+    deleteAccount(authAcc.id);
+    setDeleteAccountModal(false);
+    setLogin(false);
+    navigation("/login");
+  };
+
+  const handleClose = (e) => {
+    e.preventDefault();
+    setDeleteAccountModal(false);
+    navigation("/board");
   };
 
   return (
-    <Dialog open={open} onClose={setOpen} className="relative z-10">
+    <Dialog
+      open={deleteAccountModal}
+      onClose={setDeleteAccountModal}
+      className="relative z-10"
+    >
       <DialogBackdrop
         transition
         className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
@@ -61,7 +77,7 @@ export default function ConfirmDelete({ account }) {
               <button
                 type="button"
                 data-autofocus
-                onClick={() => setOpen(false)}
+                onClick={handleClose}
                 className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto"
               >
                 Cancel

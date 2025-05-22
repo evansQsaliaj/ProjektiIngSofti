@@ -1,24 +1,30 @@
 import { useState } from "react";
-import useJobContext from "../hooks/use-job";
-import { MdDeleteOutline } from "react-icons/md";
+import useJobContext from "../../hooks/use-job";
+import { MdDeleteOutline, MdOutlineEdit } from "react-icons/md";
 import { CiCircleInfo } from "react-icons/ci";
 import JobDetails from "./JobDetails";
 import { useDraggable } from "@dnd-kit/core";
+import EditJob from "./EditJob";
 
 export default function Job({ job, accounts }) {
   const { deleteJob } = useJobContext();
 
   const [jobDetails, setJobDetails] = useState(false);
+  const [jobEdit, setJobEdit] = useState(false);
 
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
     id: job.id,
   });
 
-  const handleToggleJob = (e) => {
+  const handleToggleJob = () => {
     setJobDetails(true);
   };
 
-  const handleDeleteJob = (e, id) => {
+  const handleEditJob = () => {
+    setJobEdit(true);
+  };
+
+  const handleDeleteJob = (id) => {
     deleteJob(id);
   };
 
@@ -48,7 +54,14 @@ export default function Job({ job, accounts }) {
           </div>
 
           <div
-            onClick={(e) => handleDeleteJob(e, job.id)}
+            onClick={handleEditJob}
+            className="text-gray-600 hover:text-gray-800 p-2"
+          >
+            <MdOutlineEdit style={{ fontSize: "20px", cursor: "pointer" }} />
+          </div>
+
+          <div
+            onClick={() => handleDeleteJob(job.id)}
             className="text-red-600 hover:text-red-800 p-2"
           >
             <MdDeleteOutline style={{ fontSize: "20px", cursor: "pointer" }} />
@@ -63,6 +76,10 @@ export default function Job({ job, accounts }) {
           setJobDetails={setJobDetails}
           accounts={accounts}
         />
+      )}
+
+      {jobEdit && (
+        <EditJob job={job} jobEdit={jobEdit} setJobEdit={setJobEdit} />
       )}
     </div>
   );

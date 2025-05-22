@@ -5,34 +5,27 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
-import useJobContext from "../hooks/use-job";
 
-export default function EditList({ list, onEditDone }) {
-  const { editList, navigation } = useJobContext();
+import useJobContext from "../../hooks/use-job";
 
-  const [open, setOpen] = useState(true);
-  const [title, setTitle] = useState(list.title);
+export default function AddList({ showAddList, setShowAddList }) {
+  const { createLists, navigation } = useJobContext();
 
-  const handleEditList = (e) => {
+  const [title, setTitle] = useState("");
+
+  const handleListCreate = (e) => {
     e.preventDefault();
-    editList(list.id, title);
-    setOpen(false);
-    onEditDone();
-    navigation("/board");
-  };
-
-  const handleTitle = (event) => {
-    setTitle(event.target.value);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    onEditDone();
+    createLists(title);
+    setShowAddList(false);
     navigation("/board");
   };
 
   return (
-    <Dialog open={open} onClose={setOpen} className="relative z-10">
+    <Dialog
+      open={showAddList}
+      onClose={setShowAddList}
+      className="relative z-10"
+    >
       <DialogBackdrop
         transition
         className="fixed inset-0 bg-gray-500/75 transition-opacity data-closed:opacity-0 data-enter:duration-300 data-enter:ease-out data-leave:duration-200 data-leave:ease-in"
@@ -48,20 +41,22 @@ export default function EditList({ list, onEditDone }) {
               <div className="sm:flex sm:items-start">
                 <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
                   <DialogTitle className="font-semibold text-gray-900 text-lg">
-                    Edit list
+                    Create new list
                   </DialogTitle>
 
-                  <div className="mt-5">
-                    <div className="mt-2">
-                      <input
-                        id="title"
-                        name="title"
-                        type="text"
-                        value={title}
-                        onChange={handleTitle}
-                        className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
-                      />
-                    </div>
+                  <div className="mt-10">
+                    <label htmlFor="title">Title</label>
+                    <input
+                      id="title"
+                      name="title"
+                      type="text"
+                      placeholder="List title"
+                      value={title}
+                      onChange={(e) => {
+                        setTitle(e.target.value);
+                      }}
+                      className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6 mt-2"
+                    />
                   </div>
                 </div>
               </div>
@@ -69,14 +64,17 @@ export default function EditList({ list, onEditDone }) {
             <div className="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
               <button
                 type="button"
-                onClick={handleEditList}
+                onClick={handleListCreate}
                 className="inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs sm:ml-3 sm:w-auto cursor-pointer"
               >
-                Edit List
+                Add List
               </button>
               <button
                 type="button"
-                onClick={handleClose}
+                onClick={() => {
+                  setShowAddList(false);
+                  navigation("/board");
+                }}
                 className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-xs ring-1 ring-gray-300 ring-inset hover:bg-gray-50 sm:mt-0 sm:w-auto cursor-pointer"
               >
                 Cancel
